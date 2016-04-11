@@ -1,3 +1,3 @@
 # Simon Game
 
-Simon Game project for FreeCodeCamp
+Simon Game project for FreeCodeCamp.
