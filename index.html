@@ -86,31 +86,36 @@
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
       Start Game
     </button>
-    <div class="switch-wrap">
-    <label><br>
-        <code>
+    
+    <div class="control-row-1">
+    
+    <div class="counter">
+        <div class="count mdl-color--grey-200 mdl-color-text--grey-500">
             00
-        </code>
-        <span class="mdl-count__label">
-            Count
-        </span>
-    </label>
-    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
-    <input type="checkbox" id="strict-mode" class="mdl-checkbox__input">
-        <span class="mdl-checkbox__label">
-            Strict Mode
-        </span>
-    </label>
-    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch">
-      <span class="mdl-switch__label">
-          Off
-      </span>
-      <input type="checkbox" id="switch" class="mdl-switch__input">
-      <span class="mdl-switch__label">
-          On
-      </span>
-    </label>
+        </div>
+        <span>Count</span>
     </div>
+    
+    
+    <div class="strict-mode">
+      
+      
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
+  <input type="checkbox" id="strict-mode" class="mdl-checkbox__input">
+  <span class="mdl-checkbox__label">Strict Mode</span>
+</label>
+
+
+      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch">
+  <input type="checkbox" id="switch" class="mdl-switch__input">
+  <span class="mdl-switch__label">Off/On&nbsp;&nbsp;&nbsp;</span>
+</label>      
+      
+    </div>
+    
+    
+    </div>
+    
   </div>
 
   <!-- Load third party JavaScript frameworks or libraries. -->

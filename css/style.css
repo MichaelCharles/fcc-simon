@@ -65,13 +65,13 @@ main .big-circle {
 }
 
 .control-box {
-	width: 216px;
-	height: 216px;
+	width: 250px;
+	height: 250px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-left: -108px;
-	margin-top: -108px;
+	margin-left: -125px;
+	margin-top: -125px;
 	border-radius: 1000px;
 	text-align: center;
 }
@@ -88,7 +88,33 @@ main .big-circle {
 	margin-bottom: 0px;
 }
 
-.mdl-count__label {
+.counter {
+	width: 50px;
 	font-size: 16px;
 	font-family: "Helvetica", "Arial", sans-serif;
+}
+.counter .count {
+	border-radius: 4px;
+	font-family: "Source Code Pro", monospace;
+	font-size: 16px;
+	line-height: 32px;
+}
+
+.control-row-1 {
+	width: 175px;
+	margin: 0 auto;
+	margin-top: 1em;
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.strict-mode {
+	min-height: 10px;
+	min-width: 10px;
+	margin-left: 20px;
+}
+
+.strict-mode label {
+	margin-bottom: 6px;
 }
