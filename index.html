@@ -5,84 +5,124 @@
 <html>
 
 <head>
-    <!-- Page Title -->
-    <title>Simon</title>
+  <!-- Page Title -->
+  <title>Simon</title>
 
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <!-- Viewport for a responsive mobile first site. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Viewport for a responsive mobile first site. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Fav Icon -->
-    <link rel="icon" type="image/png" href="https://mca62511.github.io/fcc-simon/favicon.png">
+  <!-- Fav Icon -->
+  <link rel="icon" type="image/png" href="https://mca62511.github.io/fcc-simon/favicon.png">
 
-    <!-- Google -->
-    <meta name="description" content="A copy of the classic Simon game created as a project for FreeCodeCamp.">
-    <meta name="keywords" content="simon,freecodecamp,javascript">
-    <meta name="application-name" content="Simon">
-
-
-    <!-- Facebook -->
-    <meta property="og:title" content="Simon">
-    <meta property="og:type" content="article">
-    <meta property="og:image" content="https://mca62511.github.io/fcc-simon/img/share.png">
-    <meta property="og:description" content="A copy of the classic Simon game created as a project for FreeCodeCamp.">
+  <!-- Google -->
+  <meta name="description" content="A copy of the classic Simon game created as a project for FreeCodeCamp.">
+  <meta name="keywords" content="simon,freecodecamp,javascript">
+  <meta name="application-name" content="Simon">
 
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Simon">
-    <meta name="twitter:description" content="A copy of the classic Simon game created as a project for FreeCodeCamp.">
-    <meta name="twitter:image" content="https://mca62511.github.io/fcc-simon/img/share.png">
+  <!-- Facebook -->
+  <meta property="og:title" content="Simon">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://mca62511.github.io/fcc-simon/img/share.png">
+  <meta property="og:description" content="A copy of the classic Simon game created as a project for FreeCodeCamp.">
 
-    <!-- Normalize.css for cross browser consistency -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
 
-    <!-- CSS libraries and frameworks -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Simon">
+  <meta name="twitter:description" content="A copy of the classic Simon game created as a project for FreeCodeCamp.">
+  <meta name="twitter:image" content="https://mca62511.github.io/fcc-simon/img/share.png">
 
-    <!-- Material Design Lite -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-deep_purple.min.css" />
+  <!-- Normalize.css for cross browser consistency -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
 
-    <!-- Fonts -->
+  <!-- CSS libraries and frameworks -->
 
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+  <!-- Material Design Lite -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-deep_purple.min.css" />
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+  <!-- Fonts -->
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body class="mdl-color--grey-200">
 
-	<!-- Page conents -->
-	<main>
-	    <div class="mdl-color--white mdl-shadow--16dp big-circle mdl-grid">
-	            <div class="mdl-cell mdl-cell--6-col mdl-color--green rounded-top-left mdl-shadow--2dp">
-	                
-	            </div>
-	            <div class="mdl-cell mdl-cell--6-col mdl-color--red rounded-top-right mdl-shadow--2dp">
-	                
-	            </div>
-	            <div class="mdl-cell mdl-cell--6-col mdl-color--yellow rounded-bottom-left mdl-shadow--2dp">
-	                
-	            </div>
-	            <div class="mdl-cell mdl-cell--6-col mdl-color--blue rounded-bottom-right mdl-shadow--2dp">
-	                
-	            </div>
-	    </div>
-	</main>
-	
-    <!-- Load third party JavaScript frameworks or libraries. -->
+  <!-- Page conents -->
+  <main>
+    <div class="mdl-color--white mdl-shadow--16dp big-circle">
+      <div class="button-container">
+        <div class="button-row">
+          <div class="mdl-color--green rounded-top-left mdl-shadow--2dp">
 
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+          </div>
+          <div class="mdl-color--red rounded-top-right mdl-shadow--2dp">
 
-    <!-- Material Design Lite -->
-    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+          </div>
+        </div>
+        <div class="button-row">
+          <div class="mdl-color--yellow rounded-bottom-left mdl-shadow--2dp">
 
-    <!-- Custom JavaScript -->
-    <script src="js/script.js"></script>
+          </div>
+          <div class="mdl-color--blue rounded-bottom-right mdl-shadow--2dp">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="control-box mdl-color--white mdl-shadow--6dp">
+    <h1>
+        Simon<span class="reg">&reg;</span>
+    </h1>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+      Start Game
+    </button>
+    <div class="switch-wrap">
+    <label><br>
+        <code>
+            00
+        </code>
+        <span class="mdl-count__label">
+            Count
+        </span>
+    </label>
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
+    <input type="checkbox" id="strict-mode" class="mdl-checkbox__input">
+        <span class="mdl-checkbox__label">
+            Strict Mode
+        </span>
+    </label>
+    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch">
+      <span class="mdl-switch__label">
+          Off
+      </span>
+      <input type="checkbox" id="switch" class="mdl-switch__input">
+      <span class="mdl-switch__label">
+          On
+      </span>
+    </label>
+    </div>
+  </div>
+
+  <!-- Load third party JavaScript frameworks or libraries. -->
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <!-- Material Design Lite -->
+  <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="js/script.js"></script>
 
 </body>
 
