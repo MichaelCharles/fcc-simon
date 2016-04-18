@@ -91,6 +91,8 @@ $("#blue-button").click(function(){
 $("#switch").click(function(){
     simon.input.power();
     $("#strict-mode").prop("disabled", !$("#strict-mode").prop("disabled"));
+
+    $('#strict-mode').click().click();
 });
 $("strict-mode").click(function(){
     if (simon.isOn) simon.input.strict();
