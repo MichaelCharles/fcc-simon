@@ -43,9 +43,9 @@ var soundBank = {
                 if (this.isOn){this.isStrict = !this.isStrict}
             },
             power: function() {
-                this.isOn = !this.isOn;
-                if (this.isOn === false) {
-                    this.reset();
+                simon.isOn = !simon.isOn;
+                if (simon.isOn === false) {
+                    simon.reset();
                 }
             }
         }
@@ -89,7 +89,7 @@ $("#blue-button").click(function(){
     if (simon.isOn) lightUp($(this));
 });
 $("#switch").click(function(){
-    simon.isOn = !simon.isOn;
+    simon.input.power();
     $("#strict-mode").prop("disabled", !$("#strict-mode").prop("disabled"));
 });
 $("strict-mode").click(function(){
