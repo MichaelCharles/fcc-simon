@@ -60,18 +60,18 @@
     <div class="mdl-color--white mdl-shadow--16dp big-circle">
       <div class="button-container">
         <div class="button-row">
-          <div class="mdl-color--green rounded-top-left mdl-shadow--2dp">
+          <div id="green-button" class="rounded-top-left mdl-shadow--2dp">
 
           </div>
-          <div class="mdl-color--red rounded-top-right mdl-shadow--2dp">
+          <div id="red-button" class="rounded-top-right mdl-shadow--2dp">
 
           </div>
         </div>
         <div class="button-row">
-          <div class="mdl-color--yellow rounded-bottom-left mdl-shadow--2dp">
+          <div id="yellow-button" class="rounded-bottom-left mdl-shadow--2dp">
 
           </div>
-          <div class="mdl-color--blue rounded-bottom-right mdl-shadow--2dp">
+          <div id="blue-button" class="rounded-bottom-right mdl-shadow--2dp">
 
           </div>
         </div>
@@ -83,14 +83,14 @@
     <h1>
         Simon<span class="reg">&reg;</span>
     </h1>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
       Start Game
     </button>
     
     <div class="control-row-1">
     
     <div class="counter">
-        <div class="count mdl-color--grey-200 mdl-color-text--grey-500">
+        <div id="count-display" class="count mdl-color--grey-200 mdl-color-text--grey-500">
             00
         </div>
         <span>Count</span>
@@ -100,8 +100,8 @@
     <div class="strict-mode">
       
       
-      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
-  <input type="checkbox" id="strict-mode" class="mdl-checkbox__input">
+      <label id="strict-label" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
+  <input type="checkbox" id="strict-mode" class="mdl-checkbox__input" disabled>
   <span class="mdl-checkbox__label">Strict Mode</span>
 </label>
 

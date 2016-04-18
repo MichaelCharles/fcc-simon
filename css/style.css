@@ -118,3 +118,20 @@ main .big-circle {
 .strict-mode label {
 	margin-bottom: 6px;
 }
+
+/* BUTTON COLORS */
+#red-button {
+	background-color: #F44336;
+}
+
+#green-button {
+	background-color: #4CAF50;
+}
+
+#yellow-button {
+	background-color: #FFC107;
+}
+
+#blue-button {
+	background-color: #2196F3;
+}
