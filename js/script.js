@@ -11,12 +11,15 @@ var soundBank = {
     simon = {
         isOn: false,
         isStrict: false,
-        count: 0,
+        isInGame: false,
         pattern: [],
+        count: 0,
+        index: 0,
         reset: function() {
-            this.isStrict = false;
-            this.count = 0;
-            this.pattern = [];
+            simon.isStrict = false;
+            simon.pattern = [];
+            simon.isInGame = false;
+            simon.count = 0;
         },
         input: {
             green: function() {
@@ -47,6 +50,9 @@ var soundBank = {
                 if (simon.isOn === false) {
                     simon.reset();
                 }
+            },
+            start: function() {
+                
             }
         }
     }
@@ -89,13 +95,45 @@ $("#blue-button").click(function(){
     if (simon.isOn) lightUp($(this));
 });
 $("#switch").click(function(){
+    var $label = $("#strict-label");
+    var $sm = $("#strict-mode");
+    var $btn = $("#start-game");
+    
+    // If Strict Mode is checked, uncheck it.
+    if ($label.hasClass("is-checked")) {
+        $sm.click();
+    }
+    
+    // If Strict Mode is enabled, disable it.
+    $sm.prop("disabled", !$sm.prop("disabled"));
+    
+    if ($label.hasClass("is-disabled")) {
+        $label.removeClass("is-disabled");
+    } else {
+        $label.addClass("is-disabled");
+    }
+    
+    // If the "Start Game" button is enabled, disable it. If disabled, enable it.
+    $btn.prop("disabled", !$btn.prop("disabled"));
+    
+    if ($btn.prop("disabled")) {
+        $btn.addClass("mdl-button--disabled");
+    } else {
+        $btn.removeClass("mdl-button--disabled");
+    }
+    
+    // Fire the "Power Button" input on simon.
     simon.input.power();
-    $("#strict-mode").prop("disabled", !$("#strict-mode").prop("disabled"));
-
-    $('#strict-mode').click().click();
 });
-$("strict-mode").click(function(){
+$("#strict-mode").click(function(){
     if (simon.isOn) simon.input.strict();
+})
+$("#start-game").click(function(){
+    simon.input.start();
+})
+
+$(".big-circle").click(function() {
+    $("#count-display").text(simon.count);
 })
 
 });
