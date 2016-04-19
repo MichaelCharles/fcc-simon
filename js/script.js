@@ -175,40 +175,39 @@ $(document).ready(function() {
             event.preventDefault();
         }
     });
-    
+
     // All of the following buttons should only fire if the simon game
     // is currently on and accepting input.
-    if (simon.isAcceptingInput && simon.isOn) {
-        $("#green-button").click(function() {
 
+    $("#green-button").click(function() {
+        if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("green");
             lightUp($(this));
-
-        });
-        $("#red-button").click(function() {
-
+        }
+    });
+    $("#red-button").click(function() {
+        if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("red");
             lightUp($(this));
-
-        });
-        $("#yellow-button").click(function() {
-
+        }
+    });
+    $("#yellow-button").click(function() {
+        if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("yellow");
             lightUp($(this));
-
-        });
-        $("#blue-button").click(function() {
-
+        }
+    });
+    $("#blue-button").click(function() {
+        if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("blue");
             lightUp($(this));
+        }
+    });
 
-        });
-
-        $("#strict-mode").click(function() {
-            if (simon.isOn) simon.input.strict();
-        })
-        $("#start-game").click(function() {
-            simon.input.start();
-        })
-    }
+    $("#strict-mode").click(function() {
+        if (simon.isOn && simon.isAcceptingInput) simon.input.strict();
+    })
+    $("#start-game").click(function() {
+        if (simon.isOn && simon.isAcceptingInput) simon.input.start();
+    })
 });
