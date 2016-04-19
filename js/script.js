@@ -21,100 +21,38 @@ var soundBank = {
         count: 0, // This should equal the length of the pattern array.
         index: 0, // This should represent the index in the array that the player is currently guessing.
         choices: ["red", "yellow", "green", "blue"], // These are the available choices.
-        advance: function() { // This function advances the game.
-            if (simon.count >= 20) {
-                simon.isAcceptingInput = false;
+        advance: function() { 
+            // This function advances the game.
 
-                soundBank.win.onended = function() {
-                    simon.reset();
-                }
-                soundBank.win.play();
-            } else {
-                var roll = Math.floor(Math.random() * 4);
-                var choice = simon.choices[roll];
-
-                simon.pattern.push(choice);
-                simon.playPattern();
-                simon.count += 1;
-            }
         },
         playPattern: function() {
-            var patternIndex = 0;
-            simon.isAcceptingInput = false;
-            simon.isPlayerInput = false;
-            var patternPlayer = setInterval(function() {
-                simon.isAcceptingInput = true;
-                $("#" + simon.pattern[patternIndex] + "-button").click();
-                simon.isAcceptingInput = false;
-                patternIndex++;
-                if (patternIndex >= simon.count) {
-                    simon.isAcceptingInput = true;
-                    simon.isPlayerInput = true;
-                    if (simon.count < 10) {
-                        $("#count-display").text("0" + simon.count);
-                    } else {
-                        $("#count-display").text(simon.count);
-                    }
-                    clearInterval(patternPlayer);
-                }
-            }, 1000);
+            // This plays the current pattern.
         },
-        reset: function() { //This function resets the game.
-            simon.isStrict = false;
-            simon.pattern = [];
-            simon.isAcceptingInput = true;
-            simon.count = 0;
-            simon.index = 0;
-            simon.isOn = true;
-            simon.isPlayerInput = true;
-            $("#count-display").text("00");
+        reset: function() {
+            //This function resets the game.
+
         },
         // this object handles the different kinds of input that simon can receive
         input: {
             button: function(color) {
-                if (simon.isOn) {
-                    if (simon.isPlayerInput && simon.pattern.length) {
-                        // check against pattern
-                        if (color !== simon.pattern[simon.index]) {
-                            soundBank.buzzer.onended = function() {
-                                simon.index = 0;
-                                simon.playPattern();
-                            }
-                            soundBank.buzzer.play();
-                        } else {
-                            soundBank[color].play();
-                            soundBank[color].onended = function() {
-                                simon.index += 1
-                                if (simon.index >= simon.count) {
-                                    simon.index = 0;
-                                    simon.advance();
-                                }
-                            }
-                        }
-                    } else {
-                        soundBank[color].play();
-                    }
-                }
+                // This handles what happens when a color is pressed.
+                // The pressed color should be passed in the color
+                // argument.
             },
             strict: function() {
-                if (this.isOn) {
-                    this.isStrict = !this.isStrict
-                }
+                // This enables strict mode.
             },
             power: function() {
-                simon.isOn = !simon.isOn;
-                if (simon.isOn === false) {
-                    simon.reset();
-                }
+                // This powers on and off the simon.
             },
             start: function() {
-                simon.pattern = [];
-                simon.advance();
+                // This starts a game of simon.
             }
         }
     }
 
-function lightUp(element) {
+function lightUp(element, callback) {
+    // This function lights up the background of a button
     var currentBg = element.css("background-color").replace(/[^0-9$.,]/g, '').split(",");
     var lightBg = currentBg.map(function(value) {
         value = parseInt(value) + 50;
@@ -126,12 +64,12 @@ function lightUp(element) {
     element.css({
         "background-color": lightRgbString
     });
-    simon.isAcceptingInput = false;
     setTimeout(function() {
         element.css({
             "background-color": rgbString
         });
-        if (simon.isPlayerInput) simon.isAcceptingInput = true;
+        // Execute callback function.
+        callback;
     }, 400);
 }
 
