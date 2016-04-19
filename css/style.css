@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Playfair+Display|Source+Code+Pro);
 
+body {
+	background: #f2f2f2; 
+	background: -webkit-linear-gradient(top, #f2f2f2 , #ccc); 
+	background: -o-linear-gradient(bottom, #f2f2f2 , #ccc);
+	background: -moz-linear-gradient(bottom, #f2f2f2 , #ccc);
+	background: linear-gradient(to bottom, #f2f2f2 , #ccc);
+}
+
 main {
 	display: flex;
 	align-items: center;
