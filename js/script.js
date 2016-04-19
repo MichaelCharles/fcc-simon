@@ -47,7 +47,7 @@ var soundBank = {
                 $("#" + simon.pattern[patternIndex] + "-button").click();
                 simon.isAcceptingInput = false;
                 patternIndex++;
-                if (patternIndex >= simon.pattern.length) {
+                if (patternIndex >= simon.count) {
                     simon.isAcceptingInput = true;
                     simon.isPlayerInput = true;
                     if (simon.count < 10) {
@@ -67,13 +67,12 @@ var soundBank = {
             simon.index = 0;
             simon.isOn = true;
             simon.isPlayerInput = true;
-            $("#count-display").text(simon.count);
+            $("#count-display").text("00");
         },
         // this object handles the different kinds of input that simon can receive
         input: {
             button: function(color) {
                 if (simon.isOn) {
-
                     if (simon.isPlayerInput && simon.pattern.length) {
                         // check against pattern
                         if (color !== simon.pattern[simon.index]) {
@@ -86,7 +85,7 @@ var soundBank = {
                             soundBank[color].play();
                             soundBank[color].onended = function() {
                                 simon.index += 1
-                                if (simon.index >= simon.pattern.length) {
+                                if (simon.index >= simon.count) {
                                     simon.index = 0;
                                     simon.advance();
                                 }
