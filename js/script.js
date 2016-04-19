@@ -22,7 +22,7 @@ var soundBank = {
         index: 0, // This should represent the index in the array that the player is currently guessing.
         choices: ["red", "yellow", "green", "blue"], // These are the available choices.
         advance: function() { // This function advances the game.
-            if (simon.count >= 1) {
+            if (simon.count >= 3) {
                 simon.isAcceptingInput = false;
 
                 soundBank.win.onended = function() {
