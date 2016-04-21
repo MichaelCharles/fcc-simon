@@ -1,4 +1,5 @@
 /* global $ */
+/* global devPanel */
 // soundBank ojbect contains all sounds for this project.
 var soundBank = {
         red: new Audio("audio/red.mp3"),
@@ -15,107 +16,114 @@ var soundBank = {
     simon = {
         isOn: false, // Is the game on or off?
         isStrict: false, // Is the game in strict mode?
-        isPlayerInput: true, // Is the input being given by the player?
         isAcceptingInput: true, // Is simon accepting input at the moment?
         pattern: [], // This contains the current pattern.
         count: 0, // This should equal the length of the pattern array.
         index: 0, // This should represent the index in the array that the player is currently guessing.
         choices: ["red", "yellow", "green", "blue"], // These are the available choices.
-        advance: function() { // This function advances the game.
-            if (simon.count >= 20) {
+        advance: function() {
+            if (simon.count === 3) {
                 simon.isAcceptingInput = false;
-
-                soundBank.win.onended = function() {
+                soundBank.win.onended = function(){
                     simon.reset();
+                    $("#count-display").text("00");
+                    simon.isAcceptingInput = true;
                 }
                 soundBank.win.play();
             } else {
-                var roll = Math.floor(Math.random() * 4);
-                var choice = simon.choices[roll];
-
-                simon.pattern.push(choice);
-                simon.playPattern();
-                simon.count += 1;
+            
+            var num = simon.count++;
+            $("#count-display").text(num < 10 ? "0" + num : num + 1).promise().done(function(){
+                
+            var roll = Math.floor(Math.random() * 4);
+            var choice = simon.choices[roll];
+            
+            simon.pattern.push(choice);
+            simon.playPattern();
+            });
             }
         },
-        playPattern: function() {
-            var patternIndex = 0;
+        playPattern: function(index) {
+            // This plays the current pattern.
             simon.isAcceptingInput = false;
-            simon.isPlayerInput = false;
-            var patternPlayer = setInterval(function() {
+            if (!index) {
+                index = 0;
+            } 
+            if (simon.pattern[index]) {
+            lightUp(simon.pattern[index], function(){
+                simon.playPattern(index + 1);
+            }, 400);
+            } else {
                 simon.isAcceptingInput = true;
-                $("#" + simon.pattern[patternIndex] + "-button").click();
-                simon.isAcceptingInput = false;
-                patternIndex++;
-                if (patternIndex >= simon.count) {
-                    simon.isAcceptingInput = true;
-                    simon.isPlayerInput = true;
-                    if (simon.count < 10) {
-                        $("#count-display").text("0" + simon.count);
-                    } else {
-                        $("#count-display").text(simon.count);
-                    }
-                    clearInterval(patternPlayer);
-                }
-            }, 1000);
+            }
         },
-        reset: function() { //This function resets the game.
-            simon.isStrict = false;
-            simon.pattern = [];
-            simon.isAcceptingInput = true;
+        reset: function() {
+            //This function resets the game.
             simon.count = 0;
             simon.index = 0;
-            simon.isOn = true;
-            simon.isPlayerInput = true;
-            $("#count-display").text("00");
+            simon.isAcceptingInput = true;
+            simon.pattern = [];
         },
         // this object handles the different kinds of input that simon can receive
         input: {
             button: function(color) {
-                if (simon.isOn) {
-                    if (simon.isPlayerInput && simon.pattern.length) {
-                        // check against pattern
-                        if (color !== simon.pattern[simon.index]) {
-                            soundBank.buzzer.onended = function() {
-                                simon.index = 0;
-                                simon.playPattern();
-                            }
-                            soundBank.buzzer.play();
-                        } else {
-                            soundBank[color].play();
-                            soundBank[color].onended = function() {
-                                simon.index += 1
-                                if (simon.index >= simon.count) {
+                // This handles what happens when a color is pressed.
+                // The pressed color should be passed in the color
+                // argument.
+                if (simon.isAcceptingInput) {
+                    lightUp(color, function() {
+                        if (simon.pattern.length > 0) {
+                            // Check against pattern.
+                            if (simon.pattern[simon.index] === color) {
+                                if (simon.index === simon.count - 1) {
                                     simon.index = 0;
-                                    simon.advance();
+                                simon.advance();
+                                } else {
+                                    simon.index++;
                                 }
+                            } else {
+                                // If wrong play buzzer
+                                simon.isAcceptingInput = false;
+                                soundBank.buzzer.onended = function() {
+                                    // After playing buzzer, if stirct mode then reset
+                                    if (simon.isStrict) {
+                                        simon.reset();
+                                    } else {
+                                        // If not strict mode, reset index to 0 and give
+                                        // the player another chance to input
+                                        simon.index = 0;
+                                        simon.playPattern();
+                                    }
+                                    simon.isAcceptingInput = true;
+                                }
+                                soundBank.buzzer.play();
                             }
                         }
-                    } else {
-                        soundBank[color].play();
-                    }
+                    });
                 }
             },
             strict: function() {
-                if (this.isOn) {
-                    this.isStrict = !this.isStrict
-                }
+                // This enables strict mode.
+                simon.isStrict = !simon.isStrict;
             },
             power: function() {
-                simon.isOn = !simon.isOn;
-                if (simon.isOn === false) {
+                // This powers on and off the simon.
+                if (simon.isOn) {
+                    simon.isStrict = false;
                     simon.reset();
                 }
+                simon.isOn = !simon.isOn;
+                
             },
-            start: function() {
-                simon.pattern = [];
-                simon.advance();
-            }
         }
     }
 
-function lightUp(element) {
-    var currentBg = element.css("background-color").replace(/[^0-9$.,]/g, '').split(",");
+function lightUp(color, callback, delay) {
+    if (!delay) delay = 0;
+    simon.isAcceptingInput = false;
+    // This function lights up the background of a button
+    var $element = $("#" + color + "-button");
+    var currentBg = $element.css("background-color").replace(/[^0-9$.,]/g, '').split(",");
     var lightBg = currentBg.map(function(value) {
         value = parseInt(value) + 50;
         if (value > 255) value = 255;
@@ -123,16 +131,21 @@ function lightUp(element) {
     });
     var rgbString = "rgb(" + currentBg.join(", ") + ")";
     var lightRgbString = "rgb(" + lightBg.join(", ") + ")";
-    element.css({
+    $element.css({
         "background-color": lightRgbString
     });
-    simon.isAcceptingInput = false;
-    setTimeout(function() {
-        element.css({
+
+    soundBank[color].onended = function() {
+        $element.css({
             "background-color": rgbString
         });
-        if (simon.isPlayerInput) simon.isAcceptingInput = true;
-    }, 400);
+        // Execute callback function.
+        setTimeout(function(){
+            simon.isAcceptingInput = true;
+            callback();
+        }, delay);
+    }
+    soundBank[color].play();
 }
 
 $(document).ready(function() {
@@ -181,25 +194,21 @@ $(document).ready(function() {
     $("#green-button").click(function() {
         if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("green");
-            lightUp($(this));
         }
     });
     $("#red-button").click(function() {
         if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("red");
-            lightUp($(this));
         }
     });
     $("#yellow-button").click(function() {
         if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("yellow");
-            lightUp($(this));
         }
     });
     $("#blue-button").click(function() {
         if (simon.isAcceptingInput && simon.isOn) {
             simon.input.button("blue");
-            lightUp($(this));
         }
     });
 
@@ -207,6 +216,25 @@ $(document).ready(function() {
         if (simon.isOn && simon.isAcceptingInput) simon.input.strict();
     })
     $("#start-game").click(function() {
-        if (simon.isOn && simon.isAcceptingInput) simon.input.start();
+        if (simon.isOn && simon.isAcceptingInput) simon.advance();
     })
 });
+
+
+/* Uncomment this and uncomment devpanel.js from index.html to see
+    a dev panel that displays simon's variables */
+/*$(document).ready(function() {
+    devPanel.show();
+    setInterval(function() {
+        let simonPattern = Array.from(simon.pattern);
+
+        devPanel.update([
+            ["simon.isOn", simon.isOn],
+            ["simon.isStrict", simon.isStrict],
+            ["simon.isAcceptingInput", simon.isAcceptingInput],
+            ["simon.pattern", simonPattern.join(", ")],
+            ["simon.count", simon.count],
+            ["simon.index", simon.index]
+        ]);
+    }, 300);
+});*/

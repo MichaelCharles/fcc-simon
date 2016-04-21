@@ -108,6 +108,7 @@ box-shadow: inset 1px 1px 10px 0px rgba(33,33,33,0.5);*/
 .control-row-1 {
 	width: 175px;
 	margin: 0 auto;
+
 	margin-top: 1em;
 	display: flex;
 	justify-content: space-between;
@@ -115,9 +116,9 @@ box-shadow: inset 1px 1px 10px 0px rgba(33,33,33,0.5);*/
 
 
 .strict-mode {
+	margin-left: 20px;
 	min-height: 10px;
 	min-width: 10px;
-	margin-left: 20px;
 }
 
 .strict-mode label {
@@ -139,4 +140,10 @@ box-shadow: inset 1px 1px 10px 0px rgba(33,33,33,0.5);*/
 
 #blue-button {
 	background-color: #2196F3;
+}
+
+/* OVERRIDING MDL STYLES */
+
+.mdl-switch__label {
+	left: 0px;
 }
