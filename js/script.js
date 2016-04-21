@@ -16,28 +16,47 @@ var soundBank = {
     simon = {
         isOn: false, // Is the game on or off?
         isStrict: false, // Is the game in strict mode?
-        isPlayerInput: true, // Is the input being given by the player?
         isAcceptingInput: true, // Is simon accepting input at the moment?
         pattern: [], // This contains the current pattern.
         count: -1, // This should equal the length of the pattern array.
         index: 0, // This should represent the index in the array that the player is currently guessing.
         choices: ["red", "yellow", "green", "blue"], // These are the available choices.
         advance: function() {
-            // This function advances the game.
-            // Pick a color at random.
-            var roll = Math.floor(Math.random() * 3);
+            simon.count++
+            var num = simon.count;
+            $("#count-display").text(num < 10 ? "0" + num : num + 1).promise().done(function(){
+            if (num === 3) {
+                simon.reset();
+                $("#count-display").text("00");
+            } else {
+            var roll = Math.floor(Math.random() * 4);
             var choice = simon.choices[roll];
             
             simon.pattern.push(choice);
             simon.playPattern();
-            simon.count++;
+            }
+            });
         },
-        playPattern: function() {
+        playPattern: function(index) {
             // This plays the current pattern.
+            simon.isAcceptingInput = false;
+            if (!index) {
+                index = 0;
+            } 
+            if (simon.pattern[index]) {
+            lightUp(simon.pattern[index], function(){
+                simon.playPattern(index + 1);
+            }, 400);
+            } else {
+                simon.isAcceptingInput = true;
+            }
         },
         reset: function() {
             //This function resets the game.
-
+            simon.count = -1;
+            simon.index = 0;
+            simon.isAcceptingInput = true;
+            simon.pattern = [];
         },
         // this object handles the different kinds of input that simon can receive
         input: {
@@ -47,10 +66,11 @@ var soundBank = {
                 // argument.
                 if (simon.isAcceptingInput) {
                     lightUp(color, function() {
-                        if (simon.isPlayerInput && simon.pattern.length > 0) {
+                        if (simon.pattern.length > 0) {
                             // Check against pattern.
                             if (simon.pattern[simon.index] === color) {
                                 if (simon.index === simon.count) {
+                                    simon.index = 0;
                                 simon.advance();
                                 } else {
                                     simon.index++;
@@ -82,15 +102,18 @@ var soundBank = {
             },
             power: function() {
                 // This powers on and off the simon.
+                if (simon.isOn) {
+                    simon.isStrict = false;
+                    simon.reset();
+                }
                 simon.isOn = !simon.isOn;
+                
             },
-            start: function() {
-                // This starts a game of simon.
-            }
         }
     }
 
-function lightUp(color, callback) {
+function lightUp(color, callback, delay) {
+    if (!delay) delay = 0;
     simon.isAcceptingInput = false;
     // This function lights up the background of a button
     var $element = $("#" + color + "-button");
@@ -111,8 +134,10 @@ function lightUp(color, callback) {
             "background-color": rgbString
         });
         // Execute callback function.
-        simon.isAcceptingInput = true;
-        callback();
+        setTimeout(function(){
+            simon.isAcceptingInput = true;
+            callback();
+        }, delay);
     }
     soundBank[color].play();
 }
@@ -199,7 +224,6 @@ $(document).ready(function() {
         devPanel.update([
             ["simon.isOn", simon.isOn],
             ["simon.isStrict", simon.isStrict],
-            ["simon.isPlayerInput", simon.isPlayerInput],
             ["simon.isAcceptingInput", simon.isAcceptingInput],
             ["simon.pattern", simonPattern.join(", ")],
             ["simon.count", simon.count],
