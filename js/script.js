@@ -115,6 +115,10 @@ var soundBank = {
                 simon.isOn = !simon.isOn;
                 
             },
+            start: function() {
+                simon.reset();
+                simon.advance();
+            }
         }
     }
 
@@ -216,7 +220,7 @@ $(document).ready(function() {
         if (simon.isOn && simon.isAcceptingInput) simon.input.strict();
     })
     $("#start-game").click(function() {
-        if (simon.isOn && simon.isAcceptingInput) simon.advance();
+        if (simon.isOn && simon.isAcceptingInput) simon.input.start();
     })
 });
 
