@@ -9,8 +9,12 @@ body {
 	overflow: hidden;
 }
 
+.mdl-layout__drawer-button {
+  color: #212121;
+}
+
 main {
-	display: flex;
+	display: flex !important;
 	align-items: center;
 	justify-content: center;
 	height: 100vh;

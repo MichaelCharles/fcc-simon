@@ -55,71 +55,84 @@
 
 <body>
 
-  <!-- Page conents -->
-  <main>
-    <div class="mdl-color--white mdl-shadow--16dp big-circle">
-      <div class="button-container">
-        <div class="button-row">
-          <div id="green-button" class="rounded-top-left mdl-shadow--2dp">
+<!-- No header, and the drawer stays open on larger screens (fixed drawer). -->
+<div class="mdl-layout mdl-js-layout mdl-layout--drawer">
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Simon</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="https://github.com/mca62511/fcc-simon">GitHub</a>
+      <a class="mdl-navigation__link" href="https://www.freecodecamp.com/mca62511">FreeCodeCamp</a>
+      <a class="mdl-navigation__link" href="http://michaelcharl.es/aubrey">Author</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <div class="mdl-color--white mdl-shadow--16dp big-circle">
+        <div class="button-container">
+          <div class="button-row">
+            <div id="green-button" class="rounded-top-left mdl-shadow--2dp">
 
+            </div>
+            <div id="red-button" class="rounded-top-right mdl-shadow--2dp">
+
+            </div>
           </div>
-          <div id="red-button" class="rounded-top-right mdl-shadow--2dp">
+          <div class="button-row">
+            <div id="yellow-button" class="rounded-bottom-left mdl-shadow--2dp">
 
-          </div>
-        </div>
-        <div class="button-row">
-          <div id="yellow-button" class="rounded-bottom-left mdl-shadow--2dp">
+            </div>
+            <div id="blue-button" class="rounded-bottom-right mdl-shadow--2dp">
 
-          </div>
-          <div id="blue-button" class="rounded-bottom-right mdl-shadow--2dp">
-
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
 
-  <div class="control-box ">
-    <h1>
+
+      <div class="control-box ">
+        <h1>
         Simon<span class="reg">&reg;</span>
     </h1>
-    <button id="start-game" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
+        <button id="start-game" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
       Start Game
     </button>
-    
-    <div class="control-row-1">
-    
-    <div class="counter">
-        <div id="count-display" class="count mdl-color--grey-200 mdl-color-text--grey-500">
-            00
-        </div>
-        <span>Count</span>
-    </div>
-    
-    
-    <div class="strict-mode">
-      
-      
-      <label id="strict-label" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
+
+        <div class="control-row-1">
+
+          <div class="counter">
+            <div id="count-display" class="count mdl-color--grey-200 mdl-color-text--grey-500">
+              00
+            </div>
+            <span>Count</span>
+          </div>
+
+
+          <div class="strict-mode">
+
+
+            <label id="strict-label" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="strict-mode">
   <span class="mdl-checkbox__label">Strict Mode</span>
   <input type="checkbox" id="strict-mode" class="mdl-checkbox__input" disabled>
   
 </label>
 
 
-      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch">
   <span class="mdl-switch__label">Off/On</span>
   <input type="checkbox" id="switch" class="mdl-switch__input">
   
-</label>      
-      
-    </div>
-    
-    
-    </div>
-    
-  </div>
+</label>
 
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+    
   <!-- Load third party JavaScript frameworks or libraries. -->
 
   <!-- jQuery -->
