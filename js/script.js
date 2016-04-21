@@ -23,8 +23,13 @@ var soundBank = {
         choices: ["red", "yellow", "green", "blue"], // These are the available choices.
         advance: function() {
             if (simon.count === 3) {
-                simon.reset();
-                $("#count-display").text("00");
+                simon.isAcceptingInput = false;
+                soundBank.win.onended = function(){
+                    simon.reset();
+                    $("#count-display").text("00");
+                    simon.isAcceptingInput = true;
+                }
+                soundBank.win.play();
             } else {
             
             var num = simon.count++;
@@ -54,7 +59,7 @@ var soundBank = {
         },
         reset: function() {
             //This function resets the game.
-            simon.count = -1;
+            simon.count = 0;
             simon.index = 0;
             simon.isAcceptingInput = true;
             simon.pattern = [];
@@ -216,8 +221,9 @@ $(document).ready(function() {
 });
 
 
-
-$(document).ready(function() {
+/* Uncomment this and uncomment devpanel.js from index.html to see
+    a dev panel that displays simon's variables */
+/*$(document).ready(function() {
     devPanel.show();
     setInterval(function() {
         let simonPattern = Array.from(simon.pattern);
@@ -231,4 +237,4 @@ $(document).ready(function() {
             ["simon.index", simon.index]
         ]);
     }, 300);
-});
+});*/
