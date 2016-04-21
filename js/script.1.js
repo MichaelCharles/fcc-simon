@@ -18,25 +18,24 @@ var soundBank = {
         isStrict: false, // Is the game in strict mode?
         isAcceptingInput: true, // Is simon accepting input at the moment?
         pattern: [], // This contains the current pattern.
-        count: 0, // This should equal the length of the pattern array.
+        count: -1, // This should equal the length of the pattern array.
         index: 0, // This should represent the index in the array that the player is currently guessing.
         choices: ["red", "yellow", "green", "blue"], // These are the available choices.
         advance: function() {
-            if (simon.count === 3) {
+            simon.count++
+            var num = simon.count;
+            $("#count-display").text(num < 10 ? "0" + num : num + 1).promise().done(function(){
+            if (num === 3) {
                 simon.reset();
                 $("#count-display").text("00");
             } else {
-            
-            var num = simon.count++;
-            $("#count-display").text(num < 10 ? "0" + num : num + 1).promise().done(function(){
-                
             var roll = Math.floor(Math.random() * 4);
             var choice = simon.choices[roll];
             
             simon.pattern.push(choice);
             simon.playPattern();
-            });
             }
+            });
         },
         playPattern: function(index) {
             // This plays the current pattern.
@@ -70,7 +69,7 @@ var soundBank = {
                         if (simon.pattern.length > 0) {
                             // Check against pattern.
                             if (simon.pattern[simon.index] === color) {
-                                if (simon.index === simon.count - 1) {
+                                if (simon.index === simon.count) {
                                     simon.index = 0;
                                 simon.advance();
                                 } else {
