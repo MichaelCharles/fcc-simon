@@ -13,6 +13,16 @@ body {
   color: #212121;
 }
 
+.fcc-grey {
+	height: 16px;
+}
+
+.nav-icon {
+	width: 32px;
+	text-align: center;
+	display: inline-block;
+}
+
 main {
 	display: flex !important;
 	align-items: center;
